@@ -5,7 +5,10 @@ powershell_script 'Install IIS' do
 end
 
 file 'c:\inetpub\wwwroot\Default.htm' do
-  content 'Hello, World'
+  content "<h1>Hello, World</h1>
+  <h2>PLATFORM: #{node['platform']}</h2>
+  <h2>HOSTNAME: #{node['hostname']}</h2>"
+
 end
 
 service 'w3svc' do
