@@ -4,11 +4,8 @@ powershell_script 'Install IIS' do
   not_if "(Get-WindowsFeature -Name Web-Server).Installed"
 end
 
-file 'c:\inetpub\wwwroot\Default.htm' do
-  content "<h1>Hello, World</h1>
-  <h2>PLATFORM: #{node['platform']}</h2>
-  <h2>HOSTNAME: #{node['hostname']}</h2>"
-
+template 'c:\inetpub\wwwroot\Default.htm' do
+  source 'Default.htm.erb'
 end
 
 service 'w3svc' do
